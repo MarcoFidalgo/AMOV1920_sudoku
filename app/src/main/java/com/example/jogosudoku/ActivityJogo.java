@@ -2,36 +2,179 @@ package com.example.jogosudoku;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class ActivityJogo extends AppCompatActivity {
+
 //VARIÁVEIS
     private Button bJogo[][];
+    private int jogoBackup[][];//para NAO deixar EDITAR as casas de base (serve p/ validacoes)
+    private TextView botaoConta;
     Jogo jogo;
+
+    int conta = 0;//DEBUG
+    int posXBotaoSelec,posYBotaoSelec, valorSelec;
+
+    boolean flagBotaoJogoSelec = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jogo);
-        jogo = new Jogo();
+        jogo = new Jogo(); jogoBackup = jogo.getGrelhaJogo();
         loadBotoes();
+        corTextoTabuleiroBase();
         updateBotoes();
 
-
+        botaoConta = (TextView)findViewById(R.id.tvPontos);
     }
 
 
 
+    public void onClickNumerosEscolha(View v){
+        Button b = (Button) v;//DEBUG
+        botaoConta.setText(getResources().getResourceEntryName(b.getId()));//DEBUG
+
+        if(flagBotaoJogoSelec){//só se tiver alguma cell escolhida no tabuleiro é q deixa "carregar" nos numeros de escolha
+            if (posicaoValidaBase())
+            bJogo[posXBotaoSelec][posYBotaoSelec].setText(b.getText());
+
+        }
+    }
 
 
+    public boolean posicaoValidaBase(){
+        if(jogoBackup[posXBotaoSelec][posYBotaoSelec] == 0)
+            return true;
+        return false;
+    }
+
+
+    public void onClickBotaoJogo(View v){
+        Button b = (Button) v;
+        botaoConta.setText(getResources().getResourceEntryName(b.getId()));
+
+        flagBotaoJogoSelec = true;
+        seleccionaBotao(b);
+
+    }
+    public void seleccionaBotao(Button b){
+        int lin,col;
+
+
+        for(int linha = 0; linha < 9; linha ++) {
+            for (int coluna = 0; coluna < 9; coluna++) {
+                if(bJogo[linha][coluna].getId() == b.getId()){
+                    posXBotaoSelec = linha; posYBotaoSelec = coluna;
+                    //valorSelec = Integer.parseInt(bJogo[linha][coluna].getText().toString());    (jogo.getGrelhaJogo())[linha][coluna] == 0
+                    valorSelec = (jogo.getGrelhaJogo())[linha][coluna];
+                }
+            }
+        }
+        corBotoes();
+
+
+
+
+    }
+    public void corBotoes(){
+        corBrancoTudo();
+        corQuadrado();
+        for(int linha = 0; linha < 9; linha ++) {
+            for (int coluna = 0; coluna < 9; coluna++) {
+                if(linha == posXBotaoSelec || coluna == posYBotaoSelec){                                /*Linha e coluna do botao seleccionado*/
+                    bJogo[linha][coluna].setBackgroundColor(Color.rgb(250, 239, 210));
+                }
+
+            }
+        }
+        corProcuraNumsRepetidos();
+    }
+    public void corProcuraNumsRepetidos(){
+
+
+        for(int linha = 0; linha < 9; linha ++) {
+            for (int coluna = 0; coluna < 9; coluna++) {
+                if(linha == posXBotaoSelec && coluna == posYBotaoSelec){
+                    bJogo[linha][coluna].setBackgroundColor(Color.rgb(250,242,150));
+                }
+                else if(    (jogo.getGrelhaJogo())[linha][coluna] == valorSelec && valorSelec != 0){
+
+                        bJogo[linha][coluna].setBackgroundColor(Color.rgb(255, 193, 31));//igual ao VALOR SELECCIONADO
+                        Log.i("d", "l:"+linha+" c:"+coluna);
+                }
+            }
+        }
+    }
+    public void corBrancoTudo(){
+        for(int linha = 0; linha < 9; linha ++) {
+            for (int coluna = 0; coluna < 9; coluna++) {
+                bJogo[linha][coluna].setBackgroundColor(Color.WHITE);
+            }
+        }
+
+    }
+    /*public void corEspacosVaziosABranco(){
+        for(int linha = 0; linha < 9; linha ++) {
+            for (int coluna = 0; coluna < 9; coluna++) {
+                if((jogo.getGrelhaJogo())[linha][coluna] == 0)
+                bJogo[linha][coluna].setBackgroundColor(Color.WHITE);
+            }
+        }
+    }*/
+
+
+    public void corQuadrado(){
+        Log.i("d", "corQuadrado");
+        int linha, coluna;
+        if(posXBotaoSelec < 3)
+            linha = 0;
+        else if(posXBotaoSelec >=3 && posXBotaoSelec < 6)
+            linha = 3;
+        else
+            linha = 6;
+
+        if(posYBotaoSelec < 3)
+            coluna = 0;
+        else if(posYBotaoSelec >=3 && posYBotaoSelec < 6)
+            coluna = 3;
+        else
+            coluna = 6;
+
+        for(int l = linha; l < linha + 3; l ++){
+            for(int c = coluna; c < coluna + 3; c ++){
+                bJogo[l][c].setBackgroundColor(Color.rgb(250, 239, 210));
+
+            }
+        }
+    }
+
+    public void corTextoTabuleiroBase(){
+        for(int linha = 0; linha < 9; linha ++) {
+            for (int coluna = 0; coluna < 9; coluna++) {
+                if( (jogo.getGrelhaJogo())[linha][coluna] != 0  )
+                    bJogo[linha][coluna].setTextColor(Color.BLACK);
+            }
+        }
+
+    }
     public void updateBotoes(){
 
         for(int linha = 0; linha < 9; linha ++) {
             for (int coluna = 0; coluna < 9; coluna++) {
-                bJogo[linha][coluna].setText( String.valueOf( (jogo.getGrelhaJogo())[linha][coluna] ) );
-                //Log.d("ddd",String.valueOf((jogo.getGrelhaJogo())[linha][coluna]));
+                if( (jogo.getGrelhaJogo())[linha][coluna] == 0  ){
+                    bJogo[linha][coluna].setText(" ");
+
+                }
+                else {
+                    bJogo[linha][coluna].setText(String.valueOf((jogo.getGrelhaJogo())[linha][coluna]));
+                    //Log.d("ddd",String.valueOf((jogo.getGrelhaJogo())[linha][coluna]));
+                }
             }
         }
     }

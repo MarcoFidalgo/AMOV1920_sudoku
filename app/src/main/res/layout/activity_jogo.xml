@@ -49,7 +49,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="0"/>
+                android:text="0"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b01"
@@ -60,7 +61,8 @@
                 android:background="#FFFFFF"
                 android:text="1"
                 android:textColor="#965003"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b02"
@@ -72,7 +74,7 @@
                 android:textColor="#965003"
                 android:textSize="22sp"
                 android:text="2"
-                />
+                android:onClick="onClickBotaoJogo"/>
             <TextView
                 android:layout_width="4dp"
                 android:layout_height="match_parent"/>
@@ -85,7 +87,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="3" />
+                android:text="3"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b04"
@@ -96,7 +99,8 @@
                 android:background="#FFFFFF"
                 android:text="4"
                 android:textColor="#965003"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b05"
@@ -107,7 +111,8 @@
                 android:background="#FFFFFF"
                 android:text="5"
                 android:textColor="#965003"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                android:onClick="onClickBotaoJogo"/>
             <TextView
                 android:layout_width="4dp"
                 android:layout_height="match_parent"/>
@@ -121,7 +126,8 @@
                 android:background="#FFFFFF"
                 android:text="6"
                 android:textColor="#965003"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b07"
@@ -132,7 +138,8 @@
                 android:background="#FFFFFF"
                 android:text="7"
                 android:textColor="#965003"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b08"
@@ -143,7 +150,8 @@
                 android:background="#FFFFFF"
                 android:text="8"
                 android:textColor="#965003"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                android:onClick="onClickBotaoJogo"/>
         </LinearLayout>
         //LINHA 2
 
@@ -163,7 +171,7 @@
                 android:textColor="#965003"
                 android:textSize="22sp"
                 android:text="0"
-                 />
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b11"
@@ -174,7 +182,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="1" />
+                android:text="1"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b12"
@@ -185,7 +194,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="2"/>
+                android:text="2"
+                android:onClick="onClickBotaoJogo"/>
             <TextView
                 android:layout_width="4dp"
                 android:layout_height="match_parent"/>
@@ -199,7 +209,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="3" />
+                android:text="3"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b14"
@@ -210,7 +221,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="4" />
+                android:text="4"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b15"
@@ -221,7 +233,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="5" />
+                android:text="5"
+                android:onClick="onClickBotaoJogo"/>
             <TextView
                 android:layout_width="4dp"
                 android:layout_height="match_parent"/>
@@ -235,7 +248,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="6" />
+                android:text="6"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b17"
@@ -246,7 +260,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="7" />
+                android:text="7"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b18"
@@ -257,7 +272,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="8" />
+                android:text="8"
+                android:onClick="onClickBotaoJogo"/>
         </LinearLayout>
         //LINHA 3
 
@@ -277,7 +293,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="0" />
+                android:text="0"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b21"
@@ -288,7 +305,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="1" />
+                android:text="1"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b22"
@@ -299,7 +317,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="2" />
+                android:text="2"
+                android:onClick="onClickBotaoJogo"/>
 
             <TextView
                 android:layout_width="4dp"
@@ -314,7 +333,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="3" />
+                android:text="3"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b24"
@@ -325,7 +345,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="4" />
+                android:text="4"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b25"
@@ -336,7 +357,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="5" />
+                android:text="5"
+                android:onClick="onClickBotaoJogo"/>
             <TextView
                 android:layout_width="4dp"
                 android:layout_height="match_parent"/>
@@ -350,7 +372,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="6" />
+                android:text="6"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b27"
@@ -361,7 +384,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="7" />
+                android:text="7"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b28"
@@ -372,7 +396,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="8" />
+                android:text="8"
+                android:onClick="onClickBotaoJogo"/>
         </LinearLayout>
 
         <LinearLayout
@@ -391,7 +416,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="0" />
+                android:text="0"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b31"
@@ -402,7 +428,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="1" />
+                android:text="1"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b32"
@@ -413,7 +440,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="2" />
+                android:text="2"
+                android:onClick="onClickBotaoJogo"/>
             <TextView
                 android:layout_width="4dp"
                 android:layout_height="match_parent"/>
@@ -427,7 +455,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="3" />
+                android:text="3"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b34"
@@ -438,7 +467,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="4" />
+                android:text="4"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b35"
@@ -449,7 +479,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="5" />
+                android:text="5"
+                android:onClick="onClickBotaoJogo"/>
             <TextView
                 android:layout_width="4dp"
                 android:layout_height="match_parent"/>
@@ -463,7 +494,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="6" />
+                android:text="6"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b37"
@@ -474,7 +506,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="7" />
+                android:text="7"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b38"
@@ -485,7 +518,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="8" />
+                android:text="8"
+                android:onClick="onClickBotaoJogo"/>
         </LinearLayout>
 
         <LinearLayout
@@ -503,7 +537,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="0" />
+                android:text="0"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b41"
@@ -514,7 +549,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="1" />
+                android:text="1"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b42"
@@ -525,7 +561,9 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-               android:text="2" />
+               android:text="2"
+                android:onClick="onClickBotaoJogo"/>
+
              <TextView android:layout_width="4dp"
                 android:layout_height="match_parent"/>
                 android:layout_width="4dp"
@@ -540,7 +578,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="3" />
+                android:text="3"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b44"
@@ -551,7 +590,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="4" />
+                android:text="4"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b45"
@@ -562,7 +602,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="5" />
+                android:text="5"
+                android:onClick="onClickBotaoJogo"/>
             <TextView
                 android:layout_width="4dp"
                 android:layout_height="match_parent"/>
@@ -576,7 +617,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="6" />
+                android:text="6"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b47"
@@ -587,7 +629,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="7" />
+                android:text="7"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b48"
@@ -598,7 +641,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="8" />
+                android:text="8"
+                android:onClick="onClickBotaoJogo"/>
         </LinearLayout>
 
         <LinearLayout
@@ -617,7 +661,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="0" />
+                android:text="0"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b51"
@@ -628,7 +673,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="1" />
+                android:text="1"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b52"
@@ -639,7 +685,9 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="2" />
+                android:text="2"
+                android:onClick="onClickBotaoJogo"/>
+
                <TextView android:layout_width="4dp"
                 android:layout_height="match_parent"/>
 
@@ -652,7 +700,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="3" />
+                android:text="3"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b54"
@@ -663,7 +712,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="4" />
+                android:text="4"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b55"
@@ -674,7 +724,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="5" />
+                android:text="5"
+                android:onClick="onClickBotaoJogo"/>
             <TextView
                 android:layout_width="4dp"
                 android:layout_height="match_parent"/>
@@ -688,7 +739,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="6" />
+                android:text="6"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b57"
@@ -699,7 +751,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="7" />
+                android:text="7"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b58"
@@ -710,7 +763,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="8" />
+                android:text="8"
+                android:onClick="onClickBotaoJogo"/>
         </LinearLayout>
 
         <LinearLayout
@@ -728,7 +782,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="0" />
+                android:text="0"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b61"
@@ -739,7 +794,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="1" />
+                android:text="1"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b62"
@@ -750,7 +806,9 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="2" />
+                android:text="2"
+                android:onClick="onClickBotaoJogo"/>
+
                <TextView android:layout_width="4dp"
                 android:layout_height="match_parent"/>
 
@@ -763,7 +821,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="3" />
+                android:text="3"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b64"
@@ -774,7 +833,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="4" />
+                android:text="4"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b65"
@@ -785,7 +845,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="5" />
+                android:text="5"
+                android:onClick="onClickBotaoJogo"/>
             <TextView
                 android:layout_width="4dp"
                 android:layout_height="match_parent"/>
@@ -799,7 +860,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="6" />
+                android:text="6"
+                android:onClick="onClickBotaoJogo"/>
 
 
             <Button
@@ -811,7 +873,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="7" />
+                android:text="7"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b68"
@@ -822,7 +885,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="8" />
+                android:text="8"
+                android:onClick="onClickBotaoJogo"/>
         </LinearLayout>
 
         <LinearLayout
@@ -840,7 +904,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="0" />
+                android:text="0"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b71"
@@ -851,7 +916,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="1" />
+                android:text="1"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b72"
@@ -862,7 +928,9 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="2" />
+                android:text="2"
+                android:onClick="onClickBotaoJogo"/>
+
            <TextView android:layout_width="4dp"
                 android:layout_height="match_parent"/>
 
@@ -875,7 +943,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="3" />
+                android:text="3"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b74"
@@ -886,7 +955,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="4" />
+                android:text="4"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b75"
@@ -897,7 +967,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="5" />
+                android:text="5"
+                android:onClick="onClickBotaoJogo"/>
             <TextView
                 android:layout_width="4dp"
                 android:layout_height="match_parent"/>
@@ -911,7 +982,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="6" />
+                android:text="6"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b77"
@@ -922,7 +994,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="7" />
+                android:text="7"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b78"
@@ -933,7 +1006,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="8" />
+                android:text="8"
+                android:onClick="onClickBotaoJogo"/>
         </LinearLayout>
 
         <LinearLayout
@@ -951,7 +1025,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="0" />
+                android:text="0"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b81"
@@ -960,9 +1035,10 @@
                 android:layout_margin="1dp"
                 android:layout_weight="1"
                 android:background="#FFFFFF"
+                android:onClick="onClickBotaoJogo"
+                android:text="1"
                 android:textColor="#965003"
-                android:textSize="22sp"
-                android:text="1" />
+                android:textSize="22sp" />
 
             <Button
                 android:id="@+id/b82"
@@ -973,7 +1049,9 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="2" />
+                android:text="2"
+                android:onClick="onClickBotaoJogo"/>
+
            <TextView android:layout_width="4dp"
                 android:layout_height="match_parent"/>
 
@@ -986,7 +1064,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="3" />
+                android:text="3"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b84"
@@ -997,7 +1076,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="4" />
+                android:text="4"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b85"
@@ -1008,7 +1088,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="5" />
+                android:text="5"
+                android:onClick="onClickBotaoJogo"/>
             <TextView
                 android:layout_width="4dp"
                 android:layout_height="match_parent"/>
@@ -1022,7 +1103,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="6" />
+                android:text="6"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b87"
@@ -1033,7 +1115,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="7" />
+                android:text="7"
+                android:onClick="onClickBotaoJogo"/>
 
             <Button
                 android:id="@+id/b88"
@@ -1044,7 +1127,8 @@
                 android:background="#FFFFFF"
                 android:textColor="#965003"
                 android:textSize="22sp"
-                android:text="8" />
+                android:text="8"
+                android:onClick="onClickBotaoJogo"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -1140,7 +1224,8 @@
             android:textAlignment="center"
             android:textColor="#965003"
             android:textSize="32sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:onClick="onClickNumerosEscolha"/>
 
         <Button
             android:id="@+id/bN2"
@@ -1154,7 +1239,8 @@
             android:textAlignment="center"
             android:textColor="#965003"
             android:textSize="32sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:onClick="onClickNumerosEscolha"/>
 
         <Button
             android:id="@+id/bN3"
@@ -1166,7 +1252,8 @@
             android:text="3"
             android:textColor="#965003"
             android:textSize="32sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:onClick="onClickNumerosEscolha"/>
 
         <Button
             android:id="@+id/bN4"
@@ -1178,7 +1265,8 @@
             android:text="4"
             android:textColor="#965003"
             android:textSize="32sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:onClick="onClickNumerosEscolha"/>
 
         <Button
             android:id="@+id/bN5"
@@ -1190,7 +1278,8 @@
             android:text="5"
             android:textColor="#965003"
             android:textSize="32sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:onClick="onClickNumerosEscolha"/>
 
         <Button
             android:id="@+id/bN6"
@@ -1202,7 +1291,8 @@
             android:text="6"
             android:textColor="#965003"
             android:textSize="32sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:onClick="onClickNumerosEscolha"/>
 
         <Button
             android:id="@+id/bN7"
@@ -1214,7 +1304,8 @@
             android:text="7"
             android:textColor="#965003"
             android:textSize="32sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:onClick="onClickNumerosEscolha"/>
 
         <Button
             android:id="@+id/bN8"
@@ -1226,7 +1317,8 @@
             android:text="8"
             android:textColor="#965003"
             android:textSize="32sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:onClick="onClickNumerosEscolha"/>
 
         <Button
             android:id="@+id/bN9"
@@ -1238,7 +1330,8 @@
             android:text="9"
             android:textColor="#965003"
             android:textSize="32sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:onClick="onClickNumerosEscolha"/>
     </LinearLayout>
 
 </LinearLayout>
