@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffa0"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/flSudoku"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#ffffff"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btGerar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Gerar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btResolver"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flSudoku"
+        android:onClick="onGerar"/>
+
+    <Button
+        android:id="@+id/btResolver"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Resolver"
+        app:layout_constraintBottom_toBottomOf="@+id/btGerar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/btGerar"
+        app:layout_constraintTop_toTopOf="@+id/btGerar"
+        android:onClick="onResolver"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
