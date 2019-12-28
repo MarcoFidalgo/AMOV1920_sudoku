@@ -4,45 +4,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffa0"
+    android:background="#FFEFD8"
     tools:context=".MainActivity">
 
-    <FrameLayout
-        android:id="@+id/flSudoku"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#ffffff"
-        app:layout_constraintDimensionRatio="h,1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </FrameLayout>
-
     <Button
-        android:id="@+id/btGerar"
-        android:layout_width="0dp"
+        android:id="@+id/bClient"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gerar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btResolver"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flSudoku"
-        android:onClick="onGerar"/>
-
-    <Button
-        android:id="@+id/btResolver"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Resolver"
-        app:layout_constraintBottom_toBottomOf="@+id/btGerar"
+        android:background="@drawable/estilo_botoes"
+        android:onClick="trataBotaoCliente"
+        android:padding="8dp"
+        android:text="@string/bClient"
+        android:textColor="#965003"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/btGerar"
-        app:layout_constraintTop_toTopOf="@+id/btGerar"
-        android:onClick="onResolver"/>
+        app:layout_constraintStart_toEndOf="@+id/bServer"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <Button
+        android:id="@+id/bServer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/estilo_botoes"
+        android:onClick="trataBotaoServidor"
+        android:padding="8dp"
+        android:text="@string/bServer"
+        android:textColor="#965003"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toStartOf="@+id/bClient"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/estilo_botoes"
+        android:onClick="trataBotaoM1"
+        android:padding="8dp"
+        android:text="@string/botaoM1"
+        android:textColor="#965003"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/estilo_botoes"
+        android:onClick="trataBotaoM2"
+        android:padding="8dp"
+        android:text="@string/botaoM2"
+        android:textColor="#965003"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/estilo_botoes"
+        android:onClick="trataBotaoM3"
+        android:padding="8dp"
+        android:text="@string/botaoM3"
+        android:textColor="#965003"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/imageminicio" />
+
+    <TextView
+        android:id="@+id/helpMainActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvHelpMainActivity"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

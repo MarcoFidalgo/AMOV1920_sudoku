@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">SudokuPraticarAula17_12_2019</string>
+
+    <string name="title_activity_main">MainActivity</string>
+    <string name="app_name">JogoSudoku</string>
+    <string name="botaoM2">M2 - 2 Local Players</string>
+    <string name="botaoM3">M3 - 2/3 LAN players</string>
+    <string name="botaoM1">M1 - Single Player</string>
+
+
+    <string name="bClient">Client</string>
+    <string name="bServer">Server</string>
+    <string name="tvHelpMainActivity">Press M3 Button again to show the menu</string>
+
+    <string name="error_netconn">No network connection</string>
+    <string name="serverdlg_title">RPS Server</string>
+    <string name="serverdlg_msg">Waiting for a client...</string>
+
+    <string name="game_finished">The game was finished</string>
 </resources>

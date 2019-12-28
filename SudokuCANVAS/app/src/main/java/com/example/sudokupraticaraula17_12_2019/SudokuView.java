@@ -16,22 +16,11 @@ import java.util.Random;
 public class SudokuView extends View {
 
     Paint paintMainLines, paintSubLines, paintMainNumbers, paintSmallNumbers;
-    int [][] board = {
-            {0,1,0,2,0,3,0,4,0},
-            {5,0,6,0,7,0,8,0,9},
-            {5,0,6,0,7,0,8,0,9},
-            {5,0,6,0,7,0,8,0,9},
-            {5,0,6,0,7,0,8,0,9},
-            {5,0,6,0,7,0,8,0,9},
-            {5,0,6,0,7,0,8,0,9},
-            {5,0,6,0,7,0,8,0,9},
-            {5,0,6,0,7,0,8,0,9},
-    };
-
-    public static final int BOARD_SIZE = 9;
-
-    public SudokuView(Context context) {
+    Jogo jogo;
+    public SudokuView(Context context, Jogo jogo) {
         super(context);
+        this.jogo = jogo;
+
         createPaints();
 
 
@@ -66,25 +55,25 @@ public class SudokuView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        int w = getWidth(), cellW = w/BOARD_SIZE;
-        int h = getHeight(), cellH = h/BOARD_SIZE;
+        int w = getWidth(), cellW = w/jogo.getBoardSize();
+        int h = getHeight(), cellH = h/jogo.getBoardSize();
 
         //Linhas tabuleiro
-        for(int i = 0; i<=BOARD_SIZE; i++){
+        for(int i = 0; i<=jogo.getBoardSize(); i++){
             canvas.drawLine(0,i*cellH, w, i*cellH,i % 3 == 0?paintMainLines : paintSubLines);//Linhas horizontais
             canvas.drawLine(i* cellW,0, i*cellW, h,i % 3 == 0?paintMainLines : paintSubLines);//Linhas verticais
         }
         //se n há numero, retorna
-        if(board == null)
+        if(jogo.board == null)
             return;
 
         //desenhar os numeros
         paintMainNumbers.setTextSize( cellH / 2);
         paintSmallNumbers.setTextSize(cellH / 4);
 
-        for(int r = 0; r<BOARD_SIZE; r++) {
-            for (int c = 0; c < BOARD_SIZE; c++){
-                int n = board[r][c];
+        for(int r = 0; r<jogo.getBoardSize(); r++) {
+            for (int c = 0; c < jogo.getBoardSize(); c++){
+                int n = jogo.board[r][c];
                 if(n != 0){//qnd n tem numero atribuido
                     int x = c * cellW + cellW/2;//cellW/2 deslocamento
                     int y = r * cellH + cellH/2 + cellH/6;
@@ -101,7 +90,7 @@ public class SudokuView extends View {
                     int x = c * cellW + cellW/6;//calcular o centro do numero do canto esquerdo superior
                     int y = r * cellH + cellH/6;
 
-                    for(int p = 1; p < BOARD_SIZE; p++){
+                    for(int p = 1; p < jogo.getBoardSize(); p++){
                         if(possibilities.contains(p)) {//se sim, desenha-o
                             int xp = x + (p-1) %3 * cellW/3;//o espaço q cada numero ocupada na celula
                             int yp = y + (p-1) /3 * cellH/3 + cellH/9;
@@ -115,9 +104,10 @@ public class SudokuView extends View {
 
     }
     public void setBoard(int [][] board){
-        this.board = board;
+        jogo.board = board;
         invalidate();
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -127,13 +117,17 @@ public class SudokuView extends View {
             int px = (int)event.getX();
             int py = (int)event.getY();
 
-            int w = getWidth(), cellW = w/BOARD_SIZE;
-            int h = getHeight(), cellH = h/BOARD_SIZE;
+            int w = getWidth(), cellW = w/jogo.getBoardSize();
+            int h = getHeight(), cellH = h/jogo.getBoardSize();
 
             int cellX = px/cellW;
             int cellY = py/cellH;
 
-            board[cellY][cellX] = 6;
+            //DIZ AO JOGO q tem UM CELULA SELECCIONADA NO TABULEIRO
+            jogo.setCellAtivaTabuleiro(true);
+            jogo.setPosX(cellY); jogo.setPosY(cellX);
+            //jogo.board[cellY][cellX] = 6;
+
             invalidate();
 
             return true;

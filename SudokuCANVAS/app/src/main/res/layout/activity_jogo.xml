@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFEFD8"
+    tools:context=".JogoActivity">
+
+    <FrameLayout
+        android:id="@+id/flSudoku"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#ffffff"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btGerar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onGerar"
+        android:text="Gerar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btResolver"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flSudoku" />
+
+    <Button
+        android:id="@+id/btResolver"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onResolver"
+        android:text="Resolver"
+        app:layout_constraintBottom_toBottomOf="@+id/btGerar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/btGerar"
+        app:layout_constraintTop_toTopOf="@+id/btGerar" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="85dp"
+        android:background="#ffab00"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btGerar">
+
+        <Button
+            android:id="@+id/bN1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/estilo_botoes"
+            android:onClick="onClickNumerosEscolha"
+            android:text="1"
+            android:textAlignment="center"
+            android:textColor="#965003"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/bN2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/estilo_botoes"
+            android:gravity="center"
+            android:onClick="onClickNumerosEscolha"
+            android:text="2"
+            android:textAlignment="center"
+            android:textColor="#965003"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/bN3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/estilo_botoes"
+            android:onClick="onClickNumerosEscolha"
+            android:text="3"
+            android:textColor="#965003"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/bN4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/estilo_botoes"
+            android:onClick="onClickNumerosEscolha"
+            android:text="4"
+            android:textColor="#965003"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/bN5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/estilo_botoes"
+            android:onClick="onClickNumerosEscolha"
+            android:text="5"
+            android:textColor="#965003"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/bN6"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/estilo_botoes"
+            android:onClick="onClickNumerosEscolha"
+            android:text="6"
+            android:textColor="#965003"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/bN7"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/estilo_botoes"
+            android:onClick="onClickNumerosEscolha"
+            android:text="7"
+            android:textColor="#965003"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/bN8"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/estilo_botoes"
+            android:onClick="onClickNumerosEscolha"
+            android:text="8"
+            android:textColor="#965003"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/bN9"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/estilo_botoes"
+            android:onClick="onClickNumerosEscolha"
+            android:text="9"
+            android:textColor="#965003"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btApaga"
+        android:layout_width="0dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="69dp"
+        android:backgroundTint="#FFEFD8"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/btGerar"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flSudoku"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/borracha_not_selected" />
+
+    <ImageButton
+        android:id="@+id/btNotas"
+        android:layout_width="71dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="#FFEFD8"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/btApaga"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintStart_toEndOf="@+id/btApaga"
+        app:layout_constraintTop_toTopOf="@+id/btApaga"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/pencil_not_selected" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

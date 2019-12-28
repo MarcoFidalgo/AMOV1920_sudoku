@@ -2,98 +2,79 @@ package com.example.sudokupraticaraula17_12_2019;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import pt.isec.ans.sudokulibrary.Sudoku;
-
+import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
-
-    FrameLayout flSudoku;
-    SudokuView sudokuView;
-
+    Button bServer, bClient,button, button2;
+    TextView tvHelpMainActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        flSudoku = (FrameLayout)findViewById(R.id.flSudoku);
-        sudokuView = new SudokuView(this);
-        flSudoku.addView(sudokuView);
-
-
+        bServer = (Button) findViewById(R.id.bServer);
+        bClient = (Button) findViewById(R.id.bClient);
+        button = (Button) findViewById(R.id.button);
+        button2 = (Button) findViewById(R.id.button2);
+        tvHelpMainActivity = (TextView) findViewById(R.id.helpMainActivity);
+    //Visibility
+        bServer.setVisibility(View.INVISIBLE);
+        bClient.setVisibility(View.INVISIBLE);
+        tvHelpMainActivity.setVisibility(View.INVISIBLE);
     }
 
-int [][] convert(JSONArray jsonArray){//conversao de um JSON para uma matriz
-        int [][] array = new int[9][9];
 
-
-        try{
-            for(int r = 0; r < 9; r++){
-                JSONArray jsonRow = jsonArray.getJSONArray(r);
-                for(int c = 0; c < 9; c++){
-                    array[r][c] = jsonRow.getInt(c);
-                }
-            }
-
-        }catch(Exception e){
-            array = null;
-        }
-        return array;
-}
-
-JSONArray convert(int[][] array){
-        JSONArray jsonArray = new JSONArray();
-        try{
-            for(int r = 0; r< 9; r++){
-                JSONArray jsonRow = new JSONArray();
-                for(int c = 0; c< 9; c++)
-                    jsonRow.put(array[r][c]);
-                jsonArray.put(jsonRow);
-            }
-        }
-        catch(Exception e){
-
-        }
-     return jsonArray;
-}
-
-//Métodos BOTÕES
-    public void onGerar(View view) {
-        String strJson = Sudoku.generate(7);
-        Log.i("Sudoku", "JSON: "+strJson);
-        try{
-            JSONObject json = new JSONObject(strJson);
-            if(json.optInt("result",0) == 1){//caso nao exista, devolve este valor como default
-                //vamos converter o tabuleiro
-                JSONArray jsonArray = json.getJSONArray("board");
-                sudokuView.setBoard(convert(jsonArray));
-            }
-        }catch(Exception e){}
+    //Tratamento Botoes Menu Inicial
+    public void trataBotaoM1(View view) {
+        Intent intent = new Intent(MainActivity.this, JogoActivity.class);
+        intent.putExtra("gameMode", JogoActivity.M1);
+        startActivity(intent);
     }
 
-    public void onResolver(View view) {
-        try{
-            //criar um objeto JSON com o tabuleiro la dentro
-            JSONObject json = new JSONObject();
-            json.put("board",convert(sudokuView.board));//.getboard, neste caso estou a aceder diretamente
+    public void trataBotaoM2(View view) {
+        Intent intent = new Intent(MainActivity.this, JogoActivity.class);
+        intent.putExtra("gameMode", JogoActivity.M2);
+        startActivity(intent);
+    }
 
-            String strJson = Sudoku.solve(json.toString(), 1500);//1500 timeout para resolver
+    public void trataBotaoM3(View view) {
 
-            json = new JSONObject(strJson);
-            if(json.optInt("result",0) == 1){//caso nao exista, devolve este valor como default
-                //vamos converter o tabuleiro
-                JSONArray jsonArray = json.getJSONArray("board");
-                sudokuView.setBoard(convert(jsonArray));
-            }
-        }catch(Exception e){}
 
+
+
+        //Visibility
+        if(button.getVisibility() == View.VISIBLE){
+            bServer.setVisibility(View.VISIBLE);
+            bClient.setVisibility(View.VISIBLE);
+            tvHelpMainActivity.setVisibility(View.VISIBLE);
+            button.setVisibility(View.INVISIBLE);
+            button2.setVisibility(View.INVISIBLE);
+        }
+        else{
+            bServer.setVisibility(View.INVISIBLE);
+            bClient.setVisibility(View.INVISIBLE);
+            tvHelpMainActivity.setVisibility(View.INVISIBLE);
+            button.setVisibility(View.VISIBLE);
+            button2.setVisibility(View.VISIBLE);
+        }
+
+    }
+    public void trataBotaoCliente(View view){
+        Intent intent = new Intent(MainActivity.this, JogoActivity.class);
+        intent.putExtra("gameMode", JogoActivity.M3);
+        intent.putExtra("gameHost", JogoActivity.CLIENT);
+        startActivity(intent);
+    }
+    public void trataBotaoServidor(View view){
+
+        Intent intent = new Intent(MainActivity.this, JogoActivity.class);
+        intent.putExtra("gameMode", JogoActivity.M3);
+        intent.putExtra("gameHost", JogoActivity.SERVER);
+        startActivity(intent);
     }
 }
