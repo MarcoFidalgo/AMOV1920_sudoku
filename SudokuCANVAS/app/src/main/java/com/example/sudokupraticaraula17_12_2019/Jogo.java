@@ -7,7 +7,7 @@ public class Jogo {
     public  int [][] board;//public, para facilitar....rip segurança
     public static final int BOARD_SIZE = 9;
     private boolean cellAtivaTabuleiro = false;
-
+    public int jogadoresLigados = 0;
     private int posX;
     private int posY;
 
