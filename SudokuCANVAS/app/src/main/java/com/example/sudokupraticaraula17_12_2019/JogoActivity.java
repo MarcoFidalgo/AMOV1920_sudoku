@@ -173,12 +173,14 @@ public class JogoActivity extends AppCompatActivity {
 
     }
 
-    void moveOtherPlayer() {
+    void moveOtherPlayer(int[] move) {
         //if (move == ROCK || move == PAPER || move == SCISSORS) {
-        Log.d("ttt","ttt1: "+ gamePlayer);
-            jogadas[gamePlayer] = jogada.clone();
+        if(move[2] != 0){//se for != 0 é uma jogada válida(1-9)
+            Log.d("jogo","Validação da jogada X:"+move[0]+" Y:"+move[1]+" Valor:"+move[2]+" Jogador: "+move[3]);
+            jogadas[move[3]] = move.clone();
             verifyGame();
-        //}
+
+        }
     }
 
 //[S] Thread para COMS entre clientes/servidor
@@ -193,7 +195,8 @@ public class JogoActivity extends AppCompatActivity {
                         socketGame.getInputStream()));
                 output = new PrintWriter(socketGame.getOutputStream());
                 while (!Thread.currentThread().isInterrupted()) {
-                    if(gamePlayer == SERVER && flagInicial == false){
+                    if(gamePlayer == SERVER){
+                    //if(gamePlayer == SERVER && flagInicial == false){
                         flagInicial = true;
                     //ENVIA o tabuleiro inicial ao novo jogador
 
@@ -213,22 +216,21 @@ public class JogoActivity extends AppCompatActivity {
                     String strJson = input.readLine();
                     Log.d("jogo", "Recebi pedido: "+strJson);
                     try{
-                        Log.d("jogo", "A11");
                         json = new JSONObject(strJson);
-                        Log.d("jogo", "A111");
-                        jsonArray = json.getJSONArray("board");Log.d("jogo", "A2");
-                        jsonArrayJogada = json.getJSONArray("jogada");Log.d("jogo", "A3");
+                        jsonArray = json.getJSONArray("board");
+                        jsonArrayJogada = json.getJSONArray("jogada");
+                        jogo.board = (convert(jsonArray)).clone();
 
-                        jogo.board = (convert(jsonArray)).clone();Log.d("jogo", "A4");
-                        int aa[] = convertJogada(jsonArrayJogada);Log.d("jogo", "A5");
+                        //BUSCA ID DO jogador EM CAUSA
+                        int aa[] = convertJogada(jsonArrayJogada);
                         int idJogador = aa[3];//index 3 é o ID do jogador
 
                         jogadas[idJogador] = (convertJogada(jsonArrayJogada)).clone();
                         jogada = jogadas[convertJogada(jsonArrayJogada)[3]];
 
-                        Log.d("jogo", "Pedido Recebido : " + Arrays.toString(convertJogada(json.getJSONArray("jogada"))));
+                        //Log.d("jogo", "Pedido Recebido : " + Arrays.toString(convertJogada(json.getJSONArray("jogada"))));
 
-                        updateBoard();//FALTA: ALTERAR PARA o ProcMsg.post. Enviar o handle por argumento
+                        updateBoard();
 
                     }catch(Exception e){
                         Log.d("jogo","ERRO recebe "+e.toString());
@@ -238,7 +240,7 @@ public class JogoActivity extends AppCompatActivity {
                     procMsg.post(new Runnable() {
                         @Override
                         public void run() {
-                            moveOtherPlayer();
+                            moveOtherPlayer(jogada);
                         }
                     });
                     //[S] Vou enviar a validacao da jogada ao outro jogador
@@ -307,12 +309,13 @@ public class JogoActivity extends AppCompatActivity {
     void updateBoard(){
         /*Anything that causes the UI to be updated or changed HAS to happen on the UI thread.*/
         /*https://stackoverflow.com/questions/3652560/what-is-the-android-uithread-ui-thread*/
-        runOnUiThread(new Runnable() {//Anything that causes the UI to be updated or changed HAS to happen on the UI thread
+        procMsg.post(new Runnable() {
             @Override
             public void run() {
                 sudokuView.setBoard(jogo.board);
             }
         });
+
         Log.d("jogo", "UPDATE "+Arrays.deepToString(jogo.board));
 
     }
@@ -342,9 +345,12 @@ public class JogoActivity extends AppCompatActivity {
                         /*AQUI AQUI*/
                         /*é necessário passar um JSON correto, só um array convertido em json estoira no logcat A11
                         está [2 2 1 3] e devia estar   {"jogada":[2 2 1 3]}*/
-                        
-                        Log.d("jogo", "Sending a move: " + Arrays.toString(jogadas[SERVER]));
-                        output.println(convertJogada(jogadas[SERVER]));
+                        JSONObject json = new JSONObject();
+                        json.put("jogada",convertJogada(jogadas[SERVER]));
+                        json.put("board",convert(jogo.board));//só para n dar erro(de faltar um board no json)
+
+                        Log.d("jogo", "Sending move - moveMyPlayer(): " + json.toString());
+                        output.println(json);
                         output.flush();
                     } catch (Exception e) {
                         Log.d("jogo", "Error sending a move");
@@ -355,15 +361,29 @@ public class JogoActivity extends AppCompatActivity {
             verifyGame();
        // }
     }
-    void verifyGame() {/*DOES NOTHING ATM*/
-        int x = jogadas[gamePlayer][0];
-        int y = jogadas[gamePlayer][1];
-        int valor = jogadas[gamePlayer][2];
+    void verifyGame() {/*FALTA: tirar o gamePlayer, para as validaçoes,uso o ultimo campo da Jogada q tem o ID do jogador*/
 
-        if(x != -1 && y != -1 && valor != -1) {
-            jogo.board[x][y] = valor;
-            Log.d("jogo", "[S] Novo Tabuleiro " + Arrays.deepToString(jogo.board));
+        int x,y,valor,jogador;
+
+        if(gamePlayer == SERVER){//só o servidor é q valida jogadas
+            for(int i=0;i<3; i++){
+                x = jogadas[i][0];
+                y = jogadas[i][1];
+                valor = jogadas[i][2];
+                jogador = jogadas[i][3];
+
+                jogo.board[x][y] = valor;
+
+            }
+
         }
+
+
+            //Log.d("jogo", "[S] Novo Tabuleiro " + Arrays.deepToString(jogo.board));
+
+        Log.d("jogo","VERIFY GAME,Jogadas: "+Arrays.deepToString(jogadas));
+        Log.d("jogo","VERIFY GAME, Jogador que está a verificar: "+gamePlayer);
+        Log.d("jogo","VERIFY GAME,Tabuleiro: "+Arrays.deepToString(jogo.board));
     }
     public void onResolver(View view) {
         try{
