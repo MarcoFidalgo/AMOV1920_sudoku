@@ -51,7 +51,7 @@ public class JogoActivity extends AppCompatActivity {
     int gameHost = SERVER;
     ProgressDialog pd = null;
 
-    ServerSocket serverSocket=null;
+    ServerSocket serverSocket = null;
     Socket socketGame = null;
     BufferedReader input;
     PrintWriter output;

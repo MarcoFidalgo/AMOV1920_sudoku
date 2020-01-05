@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<string name="app_name">JogoSudoku</string>
-<string name="botaoM2">M2 - 2 Jogadores local</string>
-<string name="botaoM3">M3 - 2/3 Jogadores LAN</string>
-<string name="botaoM1">M1 - Um jogador</string>
+    <string name="app_name">JogoSudoku</string>
+    <string name="botaoM2">M2 - 2 Jogadores local</string>
+    <string name="botaoM3">M3 - 2/3 Jogadores LAN</string>
+    <string name="botaoM1">M1 - Um jogador</string>
+    <string name="camera">Camara</string>
+    <string name="gallery">Galeria</string>
+    <string name="nicknametv">Alcunha:</string>
 
 </resources>
