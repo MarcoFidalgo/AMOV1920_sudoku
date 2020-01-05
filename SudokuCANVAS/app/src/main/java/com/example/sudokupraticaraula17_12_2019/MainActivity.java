@@ -67,14 +67,14 @@ public class MainActivity extends AppCompatActivity {
     public void trataBotaoCliente(View view){
         Intent intent = new Intent(MainActivity.this, JogoActivity.class);
         intent.putExtra("gameMode", JogoActivity.M3);
-        intent.putExtra("gameHost", JogoActivity.CLIENT);
+        intent.putExtra("gamePlayer", JogoActivity.CLIENT1);
         startActivity(intent);
     }
     public void trataBotaoServidor(View view){
 
         Intent intent = new Intent(MainActivity.this, JogoActivity.class);
         intent.putExtra("gameMode", JogoActivity.M3);
-        intent.putExtra("gameHost", JogoActivity.SERVER);
+        intent.putExtra("gamePlayer", JogoActivity.SERVER);
         startActivity(intent);
     }
 

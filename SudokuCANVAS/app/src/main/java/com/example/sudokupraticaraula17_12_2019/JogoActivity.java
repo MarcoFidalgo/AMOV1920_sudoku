@@ -33,6 +33,7 @@ import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Arrays;
 import java.util.Enumeration;
 
 import pt.isec.ans.sudokulibrary.Sudoku;
@@ -44,11 +45,17 @@ public class JogoActivity extends AppCompatActivity {
     public static final int M2 = 1;
     public static final int M3 = 2;
     public static final int SERVER = 0;
-    public static final int CLIENT = 1;
+    public static final int CLIENT1 = 1;
+    public static final int CLIENT2 = 2;
     private static final int PORT = 8899;
+    private int[][] localBoard;
+    boolean flagInicial = false;
+    private int jogada[] = {0,0,0,0};
+    private int jogadas[][] = { jogada,jogada,jogada };
+    private int wins[] = { 0, 0, 0 };
 
-    int gameMode = M1;//default
-    int gameHost = SERVER;
+    private int gameMode = M1;//default
+    private int gamePlayer = SERVER;
     ProgressDialog pd = null;
 
     ServerSocket serverSocket = null;
@@ -56,7 +63,7 @@ public class JogoActivity extends AppCompatActivity {
     BufferedReader input;
     PrintWriter output;
     Handler procMsg = null;
-
+    JSONObject json;
     FrameLayout flSudoku;
     SudokuView sudokuView;
     Jogo jogo;
@@ -69,7 +76,7 @@ public class JogoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_jogo);
 
         flSudoku = (FrameLayout)findViewById(R.id.flSudoku);
-
+        localBoard = new int[9][9];
         jogo = new Jogo();
         sudokuView = new SudokuView(this, jogo);
         flSudoku.addView(sudokuView);
@@ -85,7 +92,7 @@ public class JogoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null){
             gameMode = intent.getIntExtra("gameMode", M1);
-            gameHost = intent.getIntExtra("gameHost", SERVER);
+            gamePlayer = intent.getIntExtra("gamePlayer", SERVER);
         }
 
         procMsg = new Handler();
@@ -93,6 +100,10 @@ public class JogoActivity extends AppCompatActivity {
         btApaga = (ImageButton)findViewById(R.id.btApaga);
         btNotas = (ImageButton)findViewById(R.id.btNotas);
 
+        if(gamePlayer == SERVER) {//Se jogador for o serv, cria o tabuleiro
+            onGerar(null);
+            Log.d("jogo","[S] Preenchi o tabuleiro");
+        }
 
         //Visibility
         /* playButton.setVisibility(View.GONE);
@@ -106,7 +117,7 @@ public class JogoActivity extends AppCompatActivity {
         else  if(gameMode == M2){// 2 Jogadores LOCAL
             /*m2();*/}
         else if(gameMode == M3){//  2/3 Jogadores REDE
-            if(gameHost == CLIENT)
+            if(gamePlayer == CLIENT1 || gamePlayer == CLIENT2)
                 clientDlg();
             else
                 server();
@@ -162,26 +173,82 @@ public class JogoActivity extends AppCompatActivity {
 
     }
 
-    //Thread de Coms entre servidor e Clientes
+    void moveOtherPlayer(int[] move) {
+        //if (move == ROCK || move == PAPER || move == SCISSORS) {
+        if(move[2] != 0){//se for != 0 é uma jogada válida(1-9)
+            Log.d("jogo","Validação da jogada X:"+move[0]+" Y:"+move[1]+" Valor:"+move[2]+" Jogador: "+move[3]);
+            jogadas[move[3]] = move.clone();
+            verifyGame();
+
+        }
+    }
+
+//[S] Thread para COMS entre clientes/servidor
     Thread commThread = new Thread(new Runnable() {
         @Override
         public void run() {
+
+            JSONArray jsonArray = new JSONArray();
+            JSONArray jsonArrayJogada = new JSONArray();
             try {
-               /* input = new BufferedReader(new InputStreamReader(
+                input = new BufferedReader(new InputStreamReader(
                         socketGame.getInputStream()));
                 output = new PrintWriter(socketGame.getOutputStream());
                 while (!Thread.currentThread().isInterrupted()) {
-                    String read = input.readLine();
-                    final int move = Integer.parseInt(read);
-                    Log.d("RPS", "Received: " + move);
+                    if(gamePlayer == SERVER){
+                    //if(gamePlayer == SERVER && flagInicial == false){
+                        flagInicial = true;
+                    //ENVIA o tabuleiro inicial ao novo jogador
+
+                        json = new JSONObject();
+                        json.put("board",convert(jogo.board));
+
+                        Log.d("jogo","X41: "+Arrays.toString(jogada));
+                        json.put("jogada",convertJogada(jogada));
+                        Log.d("jogo","X42: "+json.toString());
+
+                        output.println(json);
+                        output.flush();
+
+                    }
+                    //RECEBE
+
+                    String strJson = input.readLine();
+                    Log.d("jogo", "Recebi pedido: "+strJson);
+                    try{
+                        json = new JSONObject(strJson);
+                        jsonArray = json.getJSONArray("board");
+                        jsonArrayJogada = json.getJSONArray("jogada");
+                        jogo.board = (convert(jsonArray)).clone();
+
+                        //BUSCA ID DO jogador EM CAUSA
+                        int aa[] = convertJogada(jsonArrayJogada);
+                        int idJogador = aa[3];//index 3 é o ID do jogador
+
+                        jogadas[idJogador] = (convertJogada(jsonArrayJogada)).clone();
+                        jogada = jogadas[convertJogada(jsonArrayJogada)[3]];
+
+                        //Log.d("jogo", "Pedido Recebido : " + Arrays.toString(convertJogada(json.getJSONArray("jogada"))));
+
+                        updateBoard();
+
+                    }catch(Exception e){
+                        Log.d("jogo","ERRO recebe "+e.toString());
+                    }
+
+
                     procMsg.post(new Runnable() {
                         @Override
                         public void run() {
-                            moveOtherPlayer(move);
+                            moveOtherPlayer(jogada);
                         }
                     });
-                }*/
+                    //[S] Vou enviar a validacao da jogada ao outro jogador
+
+
+                }
             } catch (Exception e) {
+                Log.d("jogo","ERRO G "+e.toString());
                 procMsg.post(new Runnable() {
                     @Override
                     public void run() {
@@ -202,7 +269,7 @@ public class JogoActivity extends AppCompatActivity {
                 .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        client(edtIP.getText().toString(), PORT); // to test with emulators: PORTaux);
+                        client(edtIP.getText().toString(), PORT);
                     }
                 }).setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
@@ -239,39 +306,18 @@ public class JogoActivity extends AppCompatActivity {
         t.start();
     }
 
-//conversao de um JSON para uma matriz
-    int [][] convert(JSONArray jsonArray){
-            int [][] array = new int[9][9];
-
-
-            try{
-                for(int r = 0; r < 9; r++){
-                    JSONArray jsonRow = jsonArray.getJSONArray(r);
-                    for(int c = 0; c < 9; c++){
-                        array[r][c] = jsonRow.getInt(c);
-                    }
-                }
-
-            }catch(Exception e){
-                array = null;
+    void updateBoard(){
+        /*Anything that causes the UI to be updated or changed HAS to happen on the UI thread.*/
+        /*https://stackoverflow.com/questions/3652560/what-is-the-android-uithread-ui-thread*/
+        procMsg.post(new Runnable() {
+            @Override
+            public void run() {
+                sudokuView.setBoard(jogo.board);
             }
-            return array;
-    }
-//conversao de uma matriz para um JSON
-    JSONArray convert(int[][] array){
-            JSONArray jsonArray = new JSONArray();
-            try{
-                for(int r = 0; r< 9; r++){
-                    JSONArray jsonRow = new JSONArray();
-                    for(int c = 0; c< 9; c++)
-                        jsonRow.put(array[r][c]);
-                    jsonArray.put(jsonRow);
-                }
-            }
-            catch(Exception e){
+        });
 
-            }
-         return jsonArray;
+        Log.d("jogo", "UPDATE "+Arrays.deepToString(jogo.board));
+
     }
 
 //Métodos BOTÕES
@@ -280,14 +326,65 @@ public class JogoActivity extends AppCompatActivity {
         Log.i("Sudoku", "JSON: "+strJson);
         try{
             JSONObject json = new JSONObject(strJson);
-            if(json.optInt("result",0) == 1){//caso nao exista, devolve este valor como default
+            //if(json.optInt("result",0) == 1){//caso nao exista, devolve este valor como default
                 //vamos converter o tabuleiro
                 JSONArray jsonArray = json.getJSONArray("board");
                 sudokuView.setBoard(convert(jsonArray));
-            }
+            //}
         }catch(Exception e){}
     }
 
+
+    void moveMyPlayer(int [] move) {
+        //if (jogada[0] != -1 && jogada[1] != -1 && jogada[2] != -1 && jogada[3] != -1) {//x,y,valor,nºjogador(0=serv, 1=cli1, 2=cli2)
+            jogadas[SERVER] = move;
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        /*AQUI AQUI*/
+                        /*é necessário passar um JSON correto, só um array convertido em json estoira no logcat A11
+                        está [2 2 1 3] e devia estar   {"jogada":[2 2 1 3]}*/
+                        JSONObject json = new JSONObject();
+                        json.put("jogada",convertJogada(jogadas[SERVER]));
+                        json.put("board",convert(jogo.board));//só para n dar erro(de faltar um board no json)
+
+                        Log.d("jogo", "Sending move - moveMyPlayer(): " + json.toString());
+                        output.println(json);
+                        output.flush();
+                    } catch (Exception e) {
+                        Log.d("jogo", "Error sending a move");
+                    }
+                }
+            });
+            t.start();
+            verifyGame();
+       // }
+    }
+    void verifyGame() {/*FALTA: tirar o gamePlayer, para as validaçoes,uso o ultimo campo da Jogada q tem o ID do jogador*/
+
+        int x,y,valor,jogador;
+
+        if(gamePlayer == SERVER){//só o servidor é q valida jogadas
+            for(int i=0;i<3; i++){
+                x = jogadas[i][0];
+                y = jogadas[i][1];
+                valor = jogadas[i][2];
+                jogador = jogadas[i][3];
+
+                jogo.board[x][y] = valor;
+
+            }
+
+        }
+
+
+            //Log.d("jogo", "[S] Novo Tabuleiro " + Arrays.deepToString(jogo.board));
+
+        Log.d("jogo","VERIFY GAME,Jogadas: "+Arrays.deepToString(jogadas));
+        Log.d("jogo","VERIFY GAME, Jogador que está a verificar: "+gamePlayer);
+        Log.d("jogo","VERIFY GAME,Tabuleiro: "+Arrays.deepToString(jogo.board));
+    }
     public void onResolver(View view) {
         try{
             //criar um objeto JSON com o tabuleiro la dentro
@@ -371,15 +468,87 @@ public class JogoActivity extends AppCompatActivity {
         Log.i("jogo","Validacao supl. Terminada - Jogada válida");
         return true;
     }
+    //conversao de um JSON para uma matriz
+    int [][] convert(JSONArray jsonArray){
+        int [][] array = new int[9][9];
+
+
+        try{
+            for(int r = 0; r < 9; r++){
+                JSONArray jsonRow = jsonArray.getJSONArray(r);
+                for(int c = 0; c < 9; c++){
+                    array[r][c] = jsonRow.getInt(c);
+                }
+            }
+
+        }catch(Exception e){
+            array = null;
+        }
+        return array;
+    }
+    //conversao de uma matriz para um JSON
+    JSONArray convert(int[][] array){
+        JSONArray jsonArray = new JSONArray();
+        try{
+            for(int r = 0; r< 9; r++){
+                JSONArray jsonRow = new JSONArray();
+                for(int c = 0; c< 9; c++)
+                    jsonRow.put(array[r][c]);
+                jsonArray.put(jsonRow);
+            }
+        }
+        catch(Exception e){
+
+        }
+        return jsonArray;
+    }
+    //conversao de uma JOGADA(JSON) para um ARRAY
+    int [] convertJogada(JSONArray jsonArray){
+        Log.d("jogo","PrintJSON NA CONVERSAO: "+jsonArray.toString());
+        int [] array = new int[4];
+        try{
+            // Elementos array:
+            // 0-Linha(x),     1-Coluna(y),    2-valorEscolhido  3-IdJogador
+            for(int elem = 0; elem < 4; elem++){
+                array[elem] = jsonArray.getInt(elem);
+            }
+        }catch(Exception e){
+            array = null;
+            Log.d("jogo","ERROR ConvertJogadaArray "+e.toString());
+        }
+        Log.d("jogo","ConvertJogadaArray: "+Arrays.toString(array));
+        return array;
+    }
+    //conversao de uma JOGADA(array) para um JSON
+    JSONArray convertJogada(int[] array){
+        JSONArray jsonArray = new JSONArray();
+        try{
+            // Elementos array:
+            // 0-Linha(x),     1-Coluna(y),    2-valorEscolhido
+            for(int elem = 0; elem < 4; elem++){
+                jsonArray.put(array[elem]);
+            }
+        }
+        catch(Exception e){
+            Log.d("jogo","ERROConvertJogadaJson "+e.toString());
+        }
+        Log.d("jogo","ConvertJogadaJson: "+jsonArray.toString());
+        return jsonArray;
+    }
+
     public void onClickNumerosEscolha(View view) {
-        int x,y;
+        //int x,y;
         Button b = (Button) view;
 
         if(jogo.getCellAtivaTabuleiro()){
-            x = jogo.getPosX(); y = jogo.getPosY();
+            jogada[0] = jogo.getPosX();//Posição no tabuleiro x,y
+            jogada[1] = jogo.getPosY();
+            jogada[2] = Integer.parseInt(b.getText().toString());                            //valor escolhido 1-9
+            jogada[3] = gamePlayer;                                                         //passa tambem o ID DO JOGADOR
+            jogo.board[jogada[0]][jogada[1]] = jogada[2]; //FALTA: apagar isto . só desenha localmente, nao tem utilidade futuramente
 
-            jogo.board[x][y] = Integer.parseInt(b.getText().toString());
-            Log.i("jogo","Board X:"+x+" Y:"+y+" valor: "+jogo.board[x][y]);
+            Log.d("jogo","Board X:"+jogada[0]+" Y:"+jogada[1]+" valor: "+jogada[2]+" JOGADOR: "+jogada[3]);
+            moveMyPlayer(jogada);
             sudokuView.invalidate();
 
         }
