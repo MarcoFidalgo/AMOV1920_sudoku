@@ -463,7 +463,10 @@ public class JogoActivity extends AppCompatActivity {
                     //if(x != l && y != c) {//Salta a posicao escolhida
                     if(x == l || y == c){//linha ou coluna igual
                         if (numeroJogado == jogo.board[l][c]) {//se encontrar um nr igual
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of edc1c31... Update JogoActivity.java
                             if(x == l && y == c) {
                                 continue;//Salta NUMERO escolhido
                             }
