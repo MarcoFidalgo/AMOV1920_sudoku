@@ -366,7 +366,7 @@ public class JogoActivity extends AppCompatActivity {
         return false;
     }
 
-    void verifyGame() {/*FALTA: tirar o gamePlayer, para as validaçoes,uso o ultimo campo da Jogada q tem o ID do jogador*/
+    void verifyGame() {
 
         int x,y,valor,jogador;
 
@@ -377,19 +377,43 @@ public class JogoActivity extends AppCompatActivity {
                 valor = jogadas[i][2];
                 jogador = jogadas[i][3];
 
-                jogo.board[x][y] = valor;
+                //1ªvalidacao - Repetição de valor na Vizinhança ou coluna/linha
+                if(validacaoSuplementar(x, y, valor)) {
+                    //2ªvalidação - Validação feita pelo serviço disponibilizado pelo prof.
 
+
+                    jogo.board[x][y] = valor;
+                    Log.d("jogo","[S] Jogada ACEITE");
+
+                    Thread t = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                /*ENVIA Tabuleiro correto*/
+                                JSONObject json = new JSONObject();
+                                json.put("jogada", convertJogada(jogadas[SERVER]));
+                                json.put("board", convert(jogo.board));//só para n dar erro(de faltar um board no json)
+
+                                Log.d("jogo", "Sending jogo To Player: " + json.toString());
+                                output.println(json);
+                                output.flush();
+                            } catch (Exception e) {
+                                Log.d("jogo", "Error sending board" + e);
+                            }
+                        }
+                    });
+                    t.start();
+                    updateBoard();
+                }
+                else{
+                    Log.d("jogo","[S] A Jogada NAO FOI aceite como final");
+                }
+                //Limpar a jogada do array 'jogadas' smp q faz uma validacao
+                jogadas[i][0] = 0;jogadas[i][1] = 0;jogadas[i][2] = 0;jogadas[i][3] = 0;
             }
-
         }
-
-
-        //Log.d("jogo", "[S] Novo Tabuleiro " + Arrays.deepToString(jogo.board));
-
-        Log.d("jogo","VERIFY GAME,Jogadas: "+Arrays.deepToString(jogadas));
-        Log.d("jogo","VERIFY GAME, Jogador que está a verificar: "+gamePlayer);
-        Log.d("jogo","VERIFY GAME,Tabuleiro: "+Arrays.deepToString(jogo.board));
     }
+
     public void onResolver(View view) {
         try{
             //criar um objeto JSON com o tabuleiro la dentro
@@ -427,52 +451,60 @@ public class JogoActivity extends AppCompatActivity {
         }catch(Exception e){}
 
     }
-    public boolean validacaoSuplementar(int[][] board){
-        int x = jogo.getPosX(); int xTemp;
-        int y = jogo.getPosY(); int yTemp;
-        int numeroJogado = jogo.board[x][y];
-        Log.i("jogo","Validacao supl. 1FASE");
-        for(int l= 0; l<jogo.getBoardSize();l++){
-            for(int c= 0; c<jogo.getBoardSize();c++){
-                if(x != l && y != c) {//Salta a posicao escolhida
+
+    public boolean validacaoSuplementar(int x, int y, int numeroJogado){
+        int xTemp;
+        int yTemp;
+        if(numeroJogado != 0) {
+            Log.i("jogo", "Validacao supl. 1FASE");//OK
+
+            for(int l= 0; l < 9;l++){
+                for(int c= 0; c < 9;c++){
+                    //if(x != l && y != c) {//Salta a posicao escolhida
                     if(x == l || y == c){//linha ou coluna igual
                         if (numeroJogado == jogo.board[l][c]) {//se encontrar um nr igual
+
+                            if(x == l && y == c) {
+                                continue;//Salta NUMERO escolhido
+                            }
                             Log.i("jogo", "Validacao supl. - Jogada INválida");
                             Log.i("jogo", "Numero Jogado:"+numeroJogado+" Linha:"+l+" "+x+"|||Coluna:"+c+" "+y);
                             return false;
                         }
                     }
+                    //}
                 }
             }
-        }
 
-        Log.i("jogo","Validacao supl. 2FASE");
-        //Esta parte serve para validar a vizinhança do quadrado afetado
-        if(x<3)
-            xTemp = 0;
-        else if(x>=3 && x<6)
-            xTemp = 3;
-        else
-            xTemp = 6;
-        if(y<3)
-            yTemp = 0;
-        else if(y>=3 && y<6)
-            yTemp = 3;
-        else
-            yTemp = 6;
-        for(int l = xTemp;l < xTemp+3; l++){
-            for(int c = yTemp; c < yTemp+3; c++){
-                if (numeroJogado == jogo.board[l][c]) {
-                    if(x != l && y != c) {//Salta a posicao escolhida
-                        Log.i("jogo", "Validacao supl. - Jogada INválida");
+            Log.i("jogo", "Validacao supl. 2FASE");//OK
+            //Esta parte serve para validar a vizinhança do quadrado afetado
+            if (x < 3)
+                xTemp = 0;
+            else if (x >= 3 && x < 6)
+                xTemp = 3;
+            else
+                xTemp = 6;
+            if (y < 3)
+                yTemp = 0;
+            else if (y >= 3 && y < 6)
+                yTemp = 3;
+            else
+                yTemp = 6;
+            for (int l = xTemp; l < xTemp + 3; l++) {
+                for (int c = yTemp; c < yTemp + 3; c++) {
+                    if (numeroJogado == jogo.board[l][c]) {
                         return false;
                     }
                 }
             }
+
+            Log.i("jogo", "VAL. supl. Terminada - Jogada válida: xTemp: "+xTemp+" yTemp:"+yTemp+" valor:"+numeroJogado);
+            return true;
         }
-        Log.i("jogo","Validacao supl. Terminada - Jogada válida");
-        return true;
+        Log.i("jogo", "Validacao supl.INVALIDA");
+        return false;//jogada valor = 0(invalida)
     }
+
     //conversao de um JSON para uma matriz
     int [][] convert(JSONArray jsonArray){
         int [][] array = new int[9][9];
