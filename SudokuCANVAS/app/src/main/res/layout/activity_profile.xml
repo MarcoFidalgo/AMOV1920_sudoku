@@ -11,44 +11,53 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="24dp">
 
         <TextView
             android:id="@+id/nometv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="@string/nicknametv"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/nome_editor"
+            android:id="@+id/etNome"
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
 
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
         android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/ivCamera"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="16dp"
-            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="2"
+            android:background="#000000"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <ImageView
+                android:id="@+id/ivProfilePic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="16dp">
 
@@ -57,38 +66,27 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onAbrirCamera"
-                android:padding="16dp"
+                android:padding="8dp"
                 android:text="@string/camera"
-                android:textSize="24sp" />
+                android:textSize="16sp" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onAbrirGaleria"
-                android:padding="16dp"
                 android:text="@string/gallery"
-                android:textSize="24sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:orientation="horizontal"
-        android:padding="16dp">
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onGuardarPerfil"
-            android:padding="16dp"
-            android:text="@string/camera"
-            android:textSize="24sp" />
-
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/profileSave"
+        android:onClick="onSave"
+        android:textSize="24sp" />
 
 </LinearLayout>

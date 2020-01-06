@@ -19,4 +19,6 @@
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
     <string name="nicknametv">Nickname:</string>
+    <string name="profileSave">Save</string>
+    <string name="botaoProfile">Create Profile</string>
 </resources>

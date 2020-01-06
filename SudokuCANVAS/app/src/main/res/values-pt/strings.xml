@@ -8,5 +8,7 @@
     <string name="camera">Camara</string>
     <string name="gallery">Galeria</string>
     <string name="nicknametv">Alcunha:</string>
+    <string name="profileSave">Guardar</string>
+    <string name="botaoProfile">Criar Perfil</string>
 
 </resources>

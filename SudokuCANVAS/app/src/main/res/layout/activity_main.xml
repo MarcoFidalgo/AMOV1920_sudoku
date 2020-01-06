@@ -90,7 +90,7 @@
         android:background="@drawable/estilo_botoes"
         android:onClick="trataBotaoProfile"
         android:padding="8dp"
-        android:text="@string/botaoM3"
+        android:text="@string/botaoProfile"
         android:textColor="#965003"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

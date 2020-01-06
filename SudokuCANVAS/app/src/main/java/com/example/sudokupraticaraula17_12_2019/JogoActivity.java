@@ -183,7 +183,7 @@ public class JogoActivity extends AppCompatActivity {
         }
     }
 
-//[S] Thread para COMS entre clientes/servidor
+    //[S] Thread para COMS entre clientes/servidor
     Thread commThread = new Thread(new Runnable() {
         @Override
         public void run() {
@@ -196,9 +196,9 @@ public class JogoActivity extends AppCompatActivity {
                 output = new PrintWriter(socketGame.getOutputStream());
                 while (!Thread.currentThread().isInterrupted()) {
                     if(gamePlayer == SERVER){
-                    //if(gamePlayer == SERVER && flagInicial == false){
+                        //if(gamePlayer == SERVER && flagInicial == false){
                         flagInicial = true;
-                    //ENVIA o tabuleiro inicial ao novo jogador
+                        //ENVIA o tabuleiro inicial ao novo jogador
 
                         json = new JSONObject();
                         json.put("board",convert(jogo.board));
@@ -320,47 +320,52 @@ public class JogoActivity extends AppCompatActivity {
 
     }
 
-//Métodos BOTÕES
+    //Métodos BOTÕES
     public void onGerar(View view) {
         String strJson = Sudoku.generate(7);
         Log.i("Sudoku", "JSON: "+strJson);
         try{
             JSONObject json = new JSONObject(strJson);
             //if(json.optInt("result",0) == 1){//caso nao exista, devolve este valor como default
-                //vamos converter o tabuleiro
-                JSONArray jsonArray = json.getJSONArray("board");
-                sudokuView.setBoard(convert(jsonArray));
+            //vamos converter o tabuleiro
+            JSONArray jsonArray = json.getJSONArray("board");
+            sudokuView.setBoard(convert(jsonArray));
             //}
         }catch(Exception e){}
     }
 
 
-    void moveMyPlayer(int [] move) {
+    void moveMyPlayer(int[] move) {
         //if (jogada[0] != -1 && jogada[1] != -1 && jogada[2] != -1 && jogada[3] != -1) {//x,y,valor,nºjogador(0=serv, 1=cli1, 2=cli2)
-            jogadas[SERVER] = move;
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        /*AQUI AQUI*/
+        jogadas[SERVER] = move;
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    /*AQUI AQUI*/
                         /*é necessário passar um JSON correto, só um array convertido em json estoira no logcat A11
                         está [2 2 1 3] e devia estar   {"jogada":[2 2 1 3]}*/
-                        JSONObject json = new JSONObject();
-                        json.put("jogada",convertJogada(jogadas[SERVER]));
-                        json.put("board",convert(jogo.board));//só para n dar erro(de faltar um board no json)
+                    JSONObject json = new JSONObject();
+                    json.put("jogada",convertJogada(jogadas[SERVER]));
+                    json.put("board",convert(jogo.board));//só para n dar erro(de faltar um board no json)
 
-                        Log.d("jogo", "Sending move - moveMyPlayer(): " + json.toString());
-                        output.println(json);
-                        output.flush();
-                    } catch (Exception e) {
-                        Log.d("jogo", "Error sending a move");
-                    }
+                    Log.d("jogo", "Sending move - moveMyPlayer(): " + json.toString());
+                    output.println(json);
+                    output.flush();
+                } catch (Exception e) {
+                    Log.d("jogo", "Error sending a move");
                 }
-            });
-            t.start();
-            verifyGame();
-       // }
+            }
+        });
+        t.start();
+        verifyGame();
+        // }
     }
+
+    boolean validarIntegridadeTabuleiroGerada(int[] move) {
+        return false;
+    }
+
     void verifyGame() {/*FALTA: tirar o gamePlayer, para as validaçoes,uso o ultimo campo da Jogada q tem o ID do jogador*/
 
         int x,y,valor,jogador;
@@ -379,7 +384,7 @@ public class JogoActivity extends AppCompatActivity {
         }
 
 
-            //Log.d("jogo", "[S] Novo Tabuleiro " + Arrays.deepToString(jogo.board));
+        //Log.d("jogo", "[S] Novo Tabuleiro " + Arrays.deepToString(jogo.board));
 
         Log.d("jogo","VERIFY GAME,Jogadas: "+Arrays.deepToString(jogadas));
         Log.d("jogo","VERIFY GAME, Jogador que está a verificar: "+gamePlayer);
@@ -432,9 +437,9 @@ public class JogoActivity extends AppCompatActivity {
                 if(x != l && y != c) {//Salta a posicao escolhida
                     if(x == l || y == c){//linha ou coluna igual
                         if (numeroJogado == jogo.board[l][c]) {//se encontrar um nr igual
-                                Log.i("jogo", "Validacao supl. - Jogada INválida");
-                                Log.i("jogo", "Numero Jogado:"+numeroJogado+" Linha:"+l+" "+x+"|||Coluna:"+c+" "+y);
-                                return false;
+                            Log.i("jogo", "Validacao supl. - Jogada INválida");
+                            Log.i("jogo", "Numero Jogado:"+numeroJogado+" Linha:"+l+" "+x+"|||Coluna:"+c+" "+y);
+                            return false;
                         }
                     }
                 }
@@ -548,7 +553,11 @@ public class JogoActivity extends AppCompatActivity {
             jogo.board[jogada[0]][jogada[1]] = jogada[2]; //FALTA: apagar isto . só desenha localmente, nao tem utilidade futuramente
 
             Log.d("jogo","Board X:"+jogada[0]+" Y:"+jogada[1]+" valor: "+jogada[2]+" JOGADOR: "+jogada[3]);
-            moveMyPlayer(jogada);
+            Log.d("jogo","Board - Valor antigo da celula -> " + sudokuView.initialBoard[jogada[1]][jogada[0]]);
+            //Valida tentarivas de jogadas nas celulas geradas inicialmente
+            int teste[][] = sudokuView.initialBoard;
+            if (sudokuView.initialBoard[jogada[1]][jogada[0]] == 0)
+                moveMyPlayer(jogada);
             sudokuView.invalidate();
 
         }
