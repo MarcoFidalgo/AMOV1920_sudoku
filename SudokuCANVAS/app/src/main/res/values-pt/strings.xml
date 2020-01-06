@@ -5,5 +5,14 @@
 <string name="botaoM2">M2 - 2 Jogadores local</string>
 <string name="botaoM3">M3 - 2/3 Jogadores LAN</string>
 <string name="botaoM1">M1 - Um jogador</string>
+    <string name="app_name">JogoSudoku</string>
+    <string name="botaoM2">M2 - 2 Jogadores local</string>
+    <string name="botaoM3">M3 - 2/3 Jogadores LAN</string>
+    <string name="botaoM1">M1 - Um jogador</string>
+    <string name="camera">Camara</string>
+    <string name="gallery">Galeria</string>
+    <string name="nicknametv">Alcunha:</string>
+    <string name="profileSave">Guardar</string>
+    <string name="botaoProfile">Criar Perfil</string>
 
 </resources>

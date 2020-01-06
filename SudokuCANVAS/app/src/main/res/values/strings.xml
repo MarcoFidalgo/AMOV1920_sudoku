@@ -16,4 +16,9 @@
     <string name="serverdlg_msg">Waiting for a client...</string>
 
     <string name="game_finished">The game was finished</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="nicknametv">Nickname:</string>
+    <string name="profileSave">Save</string>
+    <string name="botaoProfile">Create Profile</string>
 </resources>

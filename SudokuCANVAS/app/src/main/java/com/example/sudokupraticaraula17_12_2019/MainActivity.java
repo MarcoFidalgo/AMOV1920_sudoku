@@ -77,4 +77,9 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("gamePlayer", JogoActivity.SERVER);
         startActivity(intent);
     }
+
+    public void trataBotaoProfile(View view) {
+        Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+        startActivity(intent);
+    }
 }

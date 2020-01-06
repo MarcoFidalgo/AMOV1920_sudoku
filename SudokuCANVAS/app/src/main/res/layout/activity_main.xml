@@ -82,6 +82,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
 
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/estilo_botoes"
+        android:onClick="trataBotaoProfile"
+        android:padding="8dp"
+        android:text="@string/botaoProfile"
+        android:textColor="#965003"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="300dp"

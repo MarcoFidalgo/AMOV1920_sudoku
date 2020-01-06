@@ -17,9 +17,11 @@ public class SudokuView extends View {
 
     Paint paintMainLines, paintSubLines, paintMainNumbers, paintSmallNumbers;
     Jogo jogo;
+    int [][] initialBoard;
     public SudokuView(Context context, Jogo jogo) {
         super(context);
         this.jogo = jogo;
+        this.initialBoard = jogo.board;
 
         createPaints();
 
