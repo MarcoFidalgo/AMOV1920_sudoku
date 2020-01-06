@@ -429,14 +429,14 @@ public class JogoActivity extends AppCompatActivity {
                 //vamos converter o tabuleiro
                 JSONArray jsonArray = json.getJSONArray("board");
                 //Validação suplementar, para reforçar soluções erradas da biblioteca
-                if(validacaoSuplementar(convert(jsonArray))){
-                    sudokuView.setBoard(convert(jsonArray));
-                }
-                else{
-                    jogo.board[jogo.getPosX()][jogo.getPosY()]= 0;
-                    sudokuView.invalidate();
-                    Thread.sleep(1000);
-                }
+                //if(validacaoSuplementar(convert(jsonArray))){
+                //    sudokuView.setBoard(convert(jsonArray));
+                //}
+                //else{
+                //    jogo.board[jogo.getPosX()][jogo.getPosY()]= 0;
+                //    sudokuView.invalidate();
+                //    Thread.sleep(1000);
+                //}
                 //
                 //sudokuView.setBoard(convert(jsonArray));
             }
@@ -463,10 +463,7 @@ public class JogoActivity extends AppCompatActivity {
                     //if(x != l && y != c) {//Salta a posicao escolhida
                     if(x == l || y == c){//linha ou coluna igual
                         if (numeroJogado == jogo.board[l][c]) {//se encontrar um nr igual
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of edc1c31... Update JogoActivity.java
                             if(x == l && y == c) {
                                 continue;//Salta NUMERO escolhido
                             }
