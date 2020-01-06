@@ -582,14 +582,14 @@ public class JogoActivity extends AppCompatActivity {
             jogada[1] = jogo.getPosY();
             jogada[2] = Integer.parseInt(b.getText().toString());                            //valor escolhido 1-9
             jogada[3] = gamePlayer;                                                         //passa tambem o ID DO JOGADOR
-            jogo.board[jogada[0]][jogada[1]] = jogada[2]; //FALTA: apagar isto . só desenha localmente, nao tem utilidade futuramente
+            //jogo.board[jogada[0]][jogada[1]] = jogada[2]; //FALTA: apagar isto . só desenha localmente, nao tem utilidade futuramente
 
             Log.d("jogo","Board X:"+jogada[0]+" Y:"+jogada[1]+" valor: "+jogada[2]+" JOGADOR: "+jogada[3]);
             Log.d("jogo","Board - Valor antigo da celula -> " + sudokuView.initialBoard[jogada[1]][jogada[0]]);
             //Valida tentarivas de jogadas nas celulas geradas inicialmente
             int teste[][] = sudokuView.initialBoard;
-            if (sudokuView.initialBoard[jogada[1]][jogada[0]] == 0)
-                moveMyPlayer(jogada);
+            //if (sudokuView.initialBoard[jogada[1]][jogada[0]] == 0)
+            moveMyPlayer(jogada);
             sudokuView.invalidate();
 
         }
